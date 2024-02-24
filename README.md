@@ -19,7 +19,7 @@ $optionService = app(\Macareux\AttributeValueUtilities\Service\SelectValueOption
 // $option should be an instance of \Concrete\Core\Entity\Attribute\Value\Value\SelectValueOption class
 $optionOption = $optionService->getSelectValueOptionOption($option);
 $style = $class = '';
-    if ($optionOption) {
+if ($optionOption) {
     $style = $optionOption->getStyle();
     $class = $optionOption->getCssClass();
 }
