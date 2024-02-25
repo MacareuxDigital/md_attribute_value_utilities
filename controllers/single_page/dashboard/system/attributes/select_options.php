@@ -7,6 +7,7 @@ use Concrete\Core\Filesystem\ElementManager;
 use Concrete\Core\Page\Controller\DashboardPageController;
 use Concrete\Package\MdAttributeValueUtilities\Controller\Search\SelectOptions as SelectOptionsSearchController;
 use Macareux\AttributeValueUtilities\Entity\SelectValueOptionOption;
+use Macareux\AttributeValueUtilities\Search\SelectValueOption\SearchProvider;
 use Macareux\AttributeValueUtilities\Service\SelectValueOptionService;
 
 class SelectOptions extends DashboardPageController
@@ -15,41 +16,24 @@ class SelectOptions extends DashboardPageController
      * @var Element
      */
     protected $searchMenu;
+
     /**
      * @var Element
      */
     protected $headerMenu;
 
-    protected function getSearchMenu()
-    {
-        if (!isset($this->searchMenu)) {
-            $this->searchMenu = $this->app->make(ElementManager::class)
-                ->get('select_options/search/menu', 'md_attribute_value_utilities');
-        }
-
-        return $this->searchMenu;
-    }
-
-    protected function getHeaderMenu()
-    {
-        if (!isset($this->headerMenu)) {
-            $this->headerMenu = $this->app->make(ElementManager::class)
-                ->get('select_options/header/menu', 'md_attribute_value_utilities');
-        }
-
-        return $this->headerMenu;
-    }
-
     public function view()
     {
-        $this->set('headerMenu', $this->getSearchMenu()->getElementController());
-
         /** @var SelectOptionsSearchController $search */
         $search = $this->app->make(SelectOptionsSearchController::class);
         $result = $search->getCurrentSearchObject();
 
         if (is_object($result)) {
             $this->set('result', $result);
+
+            $headerSearch = $this->getSearchMenu();
+            $this->set('headerSearch', $headerSearch);
+            $this->setThemeViewTemplate('full.php');
         }
     }
 
@@ -105,7 +89,8 @@ class SelectOptions extends DashboardPageController
             $optionOption
                 ->setBackgroundColor($this->request->request->get('backgroundColor'))
                 ->setTextColor($this->request->request->get('textColor'))
-                ->setCssClass($this->request->request->get('cssClass'));
+                ->setCssClass($this->request->request->get('cssClass'))
+            ;
 
             $this->entityManager->persist($optionOption);
             $this->entityManager->flush();
@@ -140,5 +125,32 @@ class SelectOptions extends DashboardPageController
         }
 
         return $this->buildRedirect('/dashboard/system/attributes/select_options');
+    }
+
+    protected function getSearchMenu()
+    {
+        if (!isset($this->searchMenu)) {
+            $this->searchMenu = $this->app->make(ElementManager::class)
+                ->get('select_options/search/menu', 'md_attribute_value_utilities')
+            ;
+        }
+
+        return $this->searchMenu;
+    }
+
+    protected function getHeaderMenu()
+    {
+        if (!isset($this->headerMenu)) {
+            $this->headerMenu = $this->app->make(ElementManager::class)
+                ->get('select_options/header/menu', 'md_attribute_value_utilities')
+            ;
+        }
+
+        return $this->headerMenu;
+    }
+
+    protected function getSearchProvider(): SearchProvider
+    {
+        return $this->app->make(SearchProvider::class);
     }
 }

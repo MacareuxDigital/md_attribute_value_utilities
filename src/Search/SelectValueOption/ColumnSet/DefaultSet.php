@@ -8,6 +8,17 @@ use Macareux\AttributeValueUtilities\Service\SelectValueOptionService;
 
 class DefaultSet extends ColumnSet
 {
+    public function __construct()
+    {
+        $this->addColumn(new Column('ak', t('Attribute'), [self::class, 'getAttribute'], false));
+        $this->addColumn(new Column('a.value', t('Value'), [self::class, 'getValue']));
+        $this->addColumn(new Column('background_color', t('Background Color'), [self::class, 'getBackgroundColor'], false));
+        $this->addColumn(new Column('text_color', t('Text Color'), [self::class, 'getTextColor'], false));
+        $this->addColumn(new Column('css_class', t('Css Class'), [self::class, 'getCssClass'], false));
+        $column = $this->getColumnByKey('a.value');
+        $this->setDefaultSortColumn($column, 'asc');
+    }
+
     public function getAttribute($mixed)
     {
         $app = Application::getFacadeApplication();
@@ -15,7 +26,7 @@ class DefaultSet extends ColumnSet
         $service = $app->make(SelectValueOptionService::class);
         $ak = $service->getAttributeKey($mixed);
 
-        return $ak->getAttributeKeyDisplayName();
+        return $ak ? $ak->getAttributeKeyDisplayName() : '';
     }
 
     public function getValue($mixed)
@@ -55,16 +66,5 @@ class DefaultSet extends ColumnSet
         $option = $service->getSelectValueOptionOption($mixed);
 
         return $option ? $option->getCssClass() : '';
-    }
-
-    public function __construct()
-    {
-        $this->addColumn(new Column('ak', t('Attribute'), [DefaultSet::class, 'getAttribute'], false));
-        $this->addColumn(new Column('a.value', t('Value'), [DefaultSet::class, 'getValue']));
-        $this->addColumn(new Column('background_color', t('Background Color'), [DefaultSet::class, 'getBackgroundColor'], false));
-        $this->addColumn(new Column('text_color', t('Text Color'), [DefaultSet::class, 'getTextColor'], false));
-        $this->addColumn(new Column('css_class', t('Css Class'), [DefaultSet::class, 'getCssClass'], false));
-        $column = $this->getColumnByKey('a.value');
-        $this->setDefaultSortColumn($column, 'asc');
     }
 }

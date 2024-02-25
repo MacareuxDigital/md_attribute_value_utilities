@@ -35,7 +35,7 @@ if (isset($result) && is_object($result)) {
                     ?>
                     <tr data-details-url="<?= UrlFacade::to('/dashboard/system/attributes/select_options', 'edit', $option->getSelectAttributeOptionID()) ?>">
                         <?php foreach ($item->getColumns() as $column) { ?>
-                            <td><?= $column->getColumnValue($item); ?></td>
+                            <td><?= $column->getColumnValue($item) ?></td>
                         <?php } ?>
                     </tr>
                     <?php

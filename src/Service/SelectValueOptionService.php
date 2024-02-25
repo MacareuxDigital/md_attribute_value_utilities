@@ -13,7 +13,9 @@ class SelectValueOptionService implements ApplicationAwareInterface
 {
     use ApplicationAwareTrait;
 
-    /** @var \Doctrine\ORM\EntityManagerInterface */
+    /**
+     * @var \Doctrine\ORM\EntityManagerInterface
+     */
     protected $entityManager;
 
     /**
@@ -26,6 +28,7 @@ class SelectValueOptionService implements ApplicationAwareInterface
 
     /**
      * @param $id
+     *
      * @return SelectValueOption|object|null
      */
     public function getSelectValueOptionByID($id)
@@ -35,17 +38,19 @@ class SelectValueOptionService implements ApplicationAwareInterface
 
     /**
      * @param \Concrete\Core\Entity\Attribute\Value\Value\SelectValueOption $option
+     *
      * @return \Macareux\AttributeValueUtilities\Entity\SelectValueOptionOption|object|null
      */
     public function getSelectValueOptionOption(SelectValueOption $option)
     {
         return $this->entityManager->getRepository(SelectValueOptionOption::class)->findOneBy([
-            'avSelectOptionID' => $option->getSelectAttributeOptionID()
+            'avSelectOptionID' => $option->getSelectAttributeOptionID(),
         ]);
     }
 
     /**
      * @param \Concrete\Core\Entity\Attribute\Value\Value\SelectValueOption $option
+     *
      * @return \Concrete\Core\Entity\Attribute\Key\Key|null
      */
     public function getAttributeKey(SelectValueOption $option)
@@ -55,9 +60,9 @@ class SelectValueOptionService implements ApplicationAwareInterface
 
         /** @var SelectSettings $selectSettings */
         $selectSettings = $this->entityManager->getRepository(SelectSettings::class)->findOneBy([
-            'list' => $list
+            'list' => $list,
         ]);
 
-        return $selectSettings->getAttributeKey();
+        return $selectSettings ? $selectSettings->getAttributeKey() : null;
     }
 }

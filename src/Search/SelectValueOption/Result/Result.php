@@ -8,23 +8,11 @@ class Result extends SearchResult
 {
     public function getItemDetails($item)
     {
-        $node = new Item($this, $this->listColumns, $item);
-
-        return $node;
+        return new Item($this, $this->listColumns, $item);
     }
 
     public function getColumnDetails($column)
     {
-        $node = new Column($this, $column);
-
-        return $node;
-    }
-
-    /**
-     * @return \Concrete\Core\Search\Pagination\Pagination
-     */
-    public function getPagination()
-    {
-        return $this->pagination;
+        return new Column($this, $column);
     }
 }

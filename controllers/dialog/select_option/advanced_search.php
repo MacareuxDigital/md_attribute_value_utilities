@@ -7,7 +7,6 @@ use Concrete\Core\Entity\Search\SavedSearch;
 use Concrete\Core\Page\Page;
 use Concrete\Core\Permission\Checker;
 use Concrete\Core\Search\Field\ManagerFactory;
-use Concrete\Core\Search\ProviderInterface;
 use Concrete\Core\Support\Facade\Url;
 use Macareux\AttributeValueUtilities\Search\SelectValueOption\SearchProvider;
 
@@ -45,6 +44,12 @@ class AdvancedSearch extends AdvancedSearchController
     public function getSearchProvider()
     {
         return $this->app->make(SearchProvider::class);
+    }
+
+    public function getSearchPresets()
+    {
+        // Does not support presets
+        return [];
     }
 
     protected function canAccess()

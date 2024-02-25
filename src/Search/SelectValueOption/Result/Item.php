@@ -16,16 +16,16 @@ class Item extends SearchResultItem
         $this->populateDetails($item);
     }
 
-    protected function populateDetails($selectValueOption)
-    {
-        $this->selectValueOption = $selectValueOption;
-    }
-
     /**
      * @return \Concrete\Core\Entity\Attribute\Value\Value\SelectValueOption
      */
     public function getSelectValueOption()
     {
         return $this->selectValueOption;
+    }
+
+    protected function populateDetails($selectValueOption)
+    {
+        $this->selectValueOption = $selectValueOption;
     }
 }

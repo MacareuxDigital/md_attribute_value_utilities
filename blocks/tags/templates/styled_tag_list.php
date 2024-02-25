@@ -8,7 +8,7 @@ $optionService = app(\Macareux\AttributeValueUtilities\Service\SelectValueOption
     <div class="ccm-block-tags-wrapper">
         <?php if ($title) { ?>
             <div class="ccm-block-tags-header">
-                <h5><?=$title?></h5>
+                <h5><?= $title ?></h5>
             </div>
         <?php } ?>
 
@@ -22,18 +22,18 @@ $optionService = app(\Macareux\AttributeValueUtilities\Service\SelectValueOption
             }
             ?>
             <?php if (isset($target) && $target) { ?>
-                <a href="<?=$controller->getTagLink($option) ?>">
+                <a href="<?= $controller->getTagLink($option) ?>">
                     <?php if (isset($selectedTag) && mb_strtolower(h($option->getSelectAttributeOptionValue())) == mb_strtolower($selectedTag)) { ?>
-                        <span class="ccm-block-tags-tag ccm-block-tags-tag-selected <?= h($class) ?>" style="<?= h($style) ?>"><?=$option->getSelectAttributeOptionDisplayValue()?></span>
+                        <span class="ccm-block-tags-tag ccm-block-tags-tag-selected <?= h($class) ?>" style="<?= h($style) ?>"><?= $option->getSelectAttributeOptionDisplayValue() ?></span>
                     <?php } else { ?>
-                        <span class="ccm-block-tags-tag <?= h($class) ?>" style="<?= h($style) ?>"><?=$option->getSelectAttributeOptionDisplayValue()?></span>
+                        <span class="ccm-block-tags-tag <?= h($class) ?>" style="<?= h($style) ?>"><?= $option->getSelectAttributeOptionDisplayValue() ?></span>
                     <?php } ?>
                 </a>
             <?php } else { ?>
                 <?php if (isset($selectedTag) && mb_strtolower(h($option->getSelectAttributeOptionValue())) == mb_strtolower($selectedTag)) { ?>
-                    <span class="ccm-block-tags-tag ccm-block-tags-tag-selected <?= h($class) ?>" style="<?= h($style) ?>"><?=$option->getSelectAttributeOptionDisplayValue()?></span>
+                    <span class="ccm-block-tags-tag ccm-block-tags-tag-selected <?= h($class) ?>" style="<?= h($style) ?>"><?= $option->getSelectAttributeOptionDisplayValue() ?></span>
                 <?php } else { ?>
-                    <span class="ccm-block-tags-tag <?= h($class) ?>" style="<?= h($style) ?>"><?=$option->getSelectAttributeOptionDisplayValue()?></span>
+                    <span class="ccm-block-tags-tag <?= h($class) ?>" style="<?= h($style) ?>"><?= $option->getSelectAttributeOptionDisplayValue() ?></span>
                 <?php } ?>
             <?php } ?>
         <?php } ?>

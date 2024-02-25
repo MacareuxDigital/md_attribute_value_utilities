@@ -12,8 +12,11 @@ use Macareux\AttributeValueUtilities\Service\ServiceProvider;
 class Controller extends Package
 {
     protected $pkgHandle = 'md_attribute_value_utilities';
-    protected $appVersionRequired = '8.5.0';
-    protected $pkgVersion = '0.0.1';
+
+    protected $appVersionRequired = '9.0.0';
+
+    protected $pkgVersion = '0.1.1';
+
     protected $pkgAutoloaderRegistries = [
         'src' => '\Macareux\AttributeValueUtilities',
     ];

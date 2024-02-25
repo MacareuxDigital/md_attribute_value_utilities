@@ -4,12 +4,12 @@ use Concrete\Core\Support\Facade\Url as UrlFacade;
 
 defined('C5_EXECUTE') or die('Access Denied.');
 /** @var \Concrete\Core\Entity\Attribute\Value\Value\SelectValueOption|null $option */
-$option = isset($option) ? $option : null;
+$option = $option ?? null;
 /** @var \Macareux\AttributeValueUtilities\Entity\SelectValueOptionOption|null $optionOption */
-$optionOption = isset($optionOption) ? $optionOption : null;
-$textColor = isset($textColor) ? $textColor : '';
-$backgroundColor = isset($backgroundColor) ? $backgroundColor : '';
-$cssClass = isset($cssClass) ? $cssClass : '';
+$optionOption = $optionOption ?? null;
+$textColor = $textColor ?? '';
+$backgroundColor = $backgroundColor ?? '';
+$cssClass = $cssClass ?? '';
 /** @var \Concrete\Core\View\View $view */
 /** @var \Concrete\Core\Validation\CSRF\Token $token */
 /** @var \Concrete\Core\Form\Service\Form $form */
@@ -39,7 +39,7 @@ $cssClass = isset($cssClass) ? $cssClass : '';
     <div class="ccm-dashboard-form-actions-wrapper">
         <div class="ccm-dashboard-form-actions">
             <a href="<?= UrlFacade::to('/dashboard/system/attributes/select_options') ?>"
-               class="btn btn-secondary float-start btn-default"><?= t('Cancel'); ?></a>
+               class="btn btn-secondary float-start btn-default"><?= t('Cancel') ?></a>
             <button class="btn btn-primary float-end pull-right"><?= t('Save') ?></button>
         </div>
     </div>

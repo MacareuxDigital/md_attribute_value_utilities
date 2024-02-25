@@ -68,11 +68,13 @@ class SelectValueOptionOption
 
     /**
      * @param \Concrete\Core\Entity\Attribute\Value\Value\SelectValueOption $avSelectOptionID
+     *
      * @return SelectValueOptionOption
      */
     public function setAvSelectOptionID($avSelectOptionID)
     {
         $this->avSelectOptionID = $avSelectOptionID;
+
         return $this;
     }
 
@@ -86,11 +88,13 @@ class SelectValueOptionOption
 
     /**
      * @param string $textColor
+     *
      * @return SelectValueOptionOption
      */
     public function setTextColor($textColor)
     {
         $this->textColor = $textColor;
+
         return $this;
     }
 
@@ -104,11 +108,13 @@ class SelectValueOptionOption
 
     /**
      * @param string $backgroundColor
+     *
      * @return SelectValueOptionOption
      */
     public function setBackgroundColor($backgroundColor)
     {
         $this->backgroundColor = $backgroundColor;
+
         return $this;
     }
 
@@ -138,11 +144,13 @@ class SelectValueOptionOption
 
     /**
      * @param string $cssClass
+     *
      * @return SelectValueOptionOption
      */
     public function setCssClass($cssClass)
     {
         $this->cssClass = $cssClass;
+
         return $this;
     }
 }

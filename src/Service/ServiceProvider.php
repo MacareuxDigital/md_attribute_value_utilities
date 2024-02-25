@@ -9,8 +9,8 @@ class ServiceProvider extends CoreServiceProvider
 {
     public function register()
     {
-        $this->app['manager/search_field/select_option'] = $this->app->share(function ($app) {
-            return $this->app->make(Manager::class);
+        $this->app->singleton('manager/search_field/select_option', function ($app) {
+            return $app->make(Manager::class);
         });
     }
 }

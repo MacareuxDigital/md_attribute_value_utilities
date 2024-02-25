@@ -13,19 +13,27 @@ use Pagerfanta\Adapter\DoctrineDbalAdapter;
 
 class SelectValueOptionList extends ItemList implements PagerProviderInterface, PaginationProviderInterface
 {
-    /** @var Closure|integer|null */
+    /**
+     * @var Closure|int|null
+     */
     protected $permissionsChecker = -1;
+
+    protected $autoSortColumns = [
+        'a.value',
+    ];
 
     public function filterByKeywords($keywords)
     {
         $this->query->andWhere($this->query->expr()->like('value', ':keywords'))
-            ->setParameter('keywords', '%' . $keywords . '%');
+            ->setParameter('keywords', '%' . $keywords . '%')
+        ;
     }
 
     public function createQuery()
     {
         $this->query->select('avSelectOptionID')
-            ->from('atSelectOptions', 'a');
+            ->from('atSelectOptions', 'a')
+        ;
     }
 
     public function finalizeQuery(\Doctrine\DBAL\Query\QueryBuilder $query)
@@ -51,25 +59,27 @@ class SelectValueOptionList extends ItemList implements PagerProviderInterface, 
             ->select('count(distinct a.avSelectOptionID)')
             ->setMaxResults(1)
             ->execute()
-            ->fetchColumn();
+            ->fetchColumn()
+        ;
     }
 
-    function getPagerManager()
+    public function getPagerManager()
     {
         return new SelectValueOptionListPagerManager($this);
     }
 
-    function getPagerVariableFactory()
+    public function getPagerVariableFactory()
     {
         return new VariableFactory($this, $this->getSearchRequest());
     }
 
-    function getPaginationAdapter()
+    public function getPaginationAdapter()
     {
         return new DoctrineDbalAdapter($this->deliverQueryObject(), function ($query) {
             $query->resetQueryParts(['groupBy', 'orderBy'])
                 ->select('count(distinct a.avSelectOptionID)')
-                ->setMaxResults(1);
+                ->setMaxResults(1)
+            ;
         });
     }
 
